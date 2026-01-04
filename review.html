@@ -1,86 +1,39 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Review Pelanggan | Labana Baru</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-
-<body>
-
-<!-- NAVBAR -->
-<nav class="navbar">
-    <a href="index.html">Beranda</a>
-    <a href="menu.html">Menu</a>
-    <a href="tentang.html">Tentang</a>
-    <a href="kontak.html">Kontak</a>
-</nav>
-
-<!-- REVIEW SECTION -->
-<section class="review-section">
-    <div class="review-header">
-        <div class="review-title">
-            <h2>Review & Keluhan Pelanggan</h2>
-            <p>Apa kata pelanggan tentang Labana Baru</p>
-        </div>
-
-        <select id="filterType" class="filter-select">
-            <option value="all">Semua</option>
-            <option value="review">Review</option>
-            <option value="keluhan">Keluhan</option>
-        </select>
-    </div>
-
-    <!-- LIST REVIEW -->
-    <div id="reviewList" class="review-grid"></div>
-</section>
-
-<!-- SCRIPT -->
 <script>
 const reviewList = document.getElementById('reviewList');
 const filterType = document.getElementById('filterType');
 
-function loadReviews() {
-    const reviews = JSON.parse(localStorage.getItem('reviews')) || [];
-    reviewList.innerHTML = '';
+const API_URL = 'PASTE_URL_APPS_SCRIPT_KAMU_DI_SINI';
 
-    if (reviews.length === 0) {
-        reviewList.innerHTML = `
-            <p class="empty-review">
-                Belum ada review atau keluhan.
-            </p>
-        `;
-        return;
+async function loadReviews() {
+  reviewList.innerHTML = 'Loading...';
+
+  const res = await fetch(API_URL);
+  const reviews = await res.json();
+
+  reviewList.innerHTML = '';
+
+  reviews.reverse().forEach(review => {
+    const typeLower = review.type.toLowerCase();
+
+    if (filterType.value === 'all' || typeLower === filterType.value) {
+      const card = document.createElement('div');
+      card.className = 'review-card';
+
+      const badgeClass = typeLower === 'review' ? 'review' : 'keluhan';
+      const badgeText = typeLower === 'review' ? 'Review' : 'Keluhan';
+
+      card.innerHTML = `
+        <span class="badge ${badgeClass}">${badgeText}</span>
+        <h3>${review.name}</h3>
+        <p>${review.message}</p>
+        <small>${review.date}</small>
+      `;
+
+      reviewList.appendChild(card);
     }
-
-    reviews.forEach(review => {
-        const typeLower = review.type.toLowerCase();
-
-        if (filterType.value === 'all' || typeLower === filterType.value) {
-            const card = document.createElement('div');
-            card.className = 'review-card';
-
-            const badgeClass = typeLower === 'review' ? 'review' : 'keluhan';
-            const badgeText  = typeLower === 'review' ? 'Review' : 'Keluhan';
-
-            card.innerHTML = `
-                <span class="badge ${badgeClass}">
-                    ${badgeText}
-                </span>
-                <h3>${review.name}</h3>
-                <p>${review.message}</p>
-                <small>${review.date}</small>
-            `;
-
-            reviewList.appendChild(card);
-        }
-    });
+  });
 }
 
 filterType.addEventListener('change', loadReviews);
 loadReviews();
 </script>
-
-</body>
-</html>
