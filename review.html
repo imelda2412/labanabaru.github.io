@@ -1,39 +1,52 @@
 <script>
-const reviewList = document.getElementById('reviewList');
-const filterType = document.getElementById('filterType');
+const reviewList = document.getElementById("reviewList");
+const filterType = document.getElementById("filterType");
 
-const API_URL = 'PASTE_URL_APPS_SCRIPT_KAMU_DI_SINI';
+const API_URL = "https://script.google.com/macros/s/AKfycbySjG_vNHYgE1AOslpmQf-awFutxeMJn2eq_MJhs92B2wAR_8EcdPINhkBscfGgBfHf/exec";
 
 async function loadReviews() {
-  reviewList.innerHTML = 'Loading...';
+  reviewList.innerHTML = "Loading...";
 
-  const res = await fetch(API_URL);
-  const reviews = await res.json();
+  try {
+    const res = await fetch(API_URL);
+    const data = await res.json();
 
-  reviewList.innerHTML = '';
+    console.log(data); // WAJIB buat cek
 
-  reviews.reverse().forEach(review => {
-    const typeLower = review.type.toLowerCase();
+    reviewList.innerHTML = "";
 
-    if (filterType.value === 'all' || typeLower === filterType.value) {
-      const card = document.createElement('div');
-      card.className = 'review-card';
-
-      const badgeClass = typeLower === 'review' ? 'review' : 'keluhan';
-      const badgeText = typeLower === 'review' ? 'Review' : 'Keluhan';
-
-      card.innerHTML = `
-        <span class="badge ${badgeClass}">${badgeText}</span>
-        <h3>${review.name}</h3>
-        <p>${review.message}</p>
-        <small>${review.date}</small>
-      `;
-
-      reviewList.appendChild(card);
+    if (data.length === 0) {
+      reviewList.innerHTML = "<p>Belum ada review.</p>";
+      return;
     }
-  });
+
+    data.reverse().forEach(item => {
+      const tipe = item.tipe.toLowerCase();
+
+      if (filterType.value === "all" || tipe === filterType.value) {
+        const card = document.createElement("div");
+        card.className = "review-card";
+
+        const badgeClass = tipe === "review" ? "review" : "keluhan";
+        const badgeText = tipe === "review" ? "Review" : "Keluhan";
+
+        card.innerHTML = `
+          <span class="badge ${badgeClass}">${badgeText}</span>
+          <h3>${item.nama}</h3>
+          <p>${item.pesan}</p>
+          <small>${item.tanggal}</small>
+        `;
+
+        reviewList.appendChild(card);
+      }
+    });
+
+  } catch (error) {
+    console.error("ERROR:", error);
+    reviewList.innerHTML = "<p>Gagal memuat data.</p>";
+  }
 }
 
-filterType.addEventListener('change', loadReviews);
+filterType.addEventListener("change", loadReviews);
 loadReviews();
 </script>
