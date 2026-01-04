@@ -1,3 +1,5 @@
+
+You said:
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -46,11 +48,11 @@ function loadReviews() {
     reviewList.innerHTML = '';
 
     if (reviews.length === 0) {
-        reviewList.innerHTML = `
+        reviewList.innerHTML = 
             <p class="empty-review">
                 Belum ada review atau keluhan.
             </p>
-        `;
+        ;
         return;
     }
 
@@ -64,14 +66,14 @@ function loadReviews() {
             const badgeClass = typeLower === 'review' ? 'review' : 'keluhan';
             const badgeText  = typeLower === 'review' ? 'Review' : 'Keluhan';
 
-            card.innerHTML = `
+            card.innerHTML = 
                 <span class="badge ${badgeClass}">
                     ${badgeText}
                 </span>
                 <h3>${review.name}</h3>
                 <p>${review.message}</p>
                 <small>${review.date}</small>
-            `;
+            ;
 
             reviewList.appendChild(card);
         }
