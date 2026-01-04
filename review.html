@@ -11,42 +11,46 @@ async function loadReviews() {
     const res = await fetch(API_URL);
     const data = await res.json();
 
-    console.log(data); // WAJIB buat cek
+    console.log("DATA:", data);
 
     reviewList.innerHTML = "";
 
-    if (data.length === 0) {
+    if (!data || data.length === 0) {
       reviewList.innerHTML = "<p>Belum ada review.</p>";
       return;
     }
 
     data.reverse().forEach(item => {
-      const tipe = item.tipe.toLowerCase();
+      const tipe = (item.tipe || "review").toLowerCase();
 
-      if (filterType.value === "all" || tipe === filterType.value) {
+      // kalau filter tidak ada → tampilkan semua
+      if (!filterType || filterType.value === "all" || tipe === filterType.value) {
         const card = document.createElement("div");
         card.className = "review-card";
 
-        const badgeClass = tipe === "review" ? "review" : "keluhan";
-        const badgeText = tipe === "review" ? "Review" : "Keluhan";
+        const badgeClass = tipe === "keluhan" ? "keluhan" : "review";
 
         card.innerHTML = `
-          <span class="badge ${badgeClass}">${badgeText}</span>
-          <h3>${item.nama}</h3>
-          <p>${item.pesan}</p>
-          <small>${item.tanggal}</small>
+          <span class="badge ${badgeClass}">${tipe.toUpperCase()}</span>
+          <h3>${item.nama || "-"}</h3>
+          <p>${item.pesan || "-"}</p>
+          <small>${item.tanggal || ""}</small>
         `;
 
         reviewList.appendChild(card);
       }
     });
 
-  } catch (error) {
-    console.error("ERROR:", error);
+  } catch (err) {
+    console.error("FETCH ERROR:", err);
     reviewList.innerHTML = "<p>Gagal memuat data.</p>";
   }
 }
 
-filterType.addEventListener("change", loadReviews);
+// hanya pasang event kalau select-nya ada
+if (filterType) {
+  filterType.addEventListener("change", loadReviews);
+}
+
 loadReviews();
 </script>
