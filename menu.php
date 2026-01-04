@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Daftar Menu - Labana Baru</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <a href="beranda.php">Beranda</a>
+    <a href="menu.php">Menu</a>
+    <a href="tentang.php">Tentang</a>
+    <a href="kontak.php">Kontak</a>
+</nav>
+
+<!-- JUDUL -->
+<h2 class="page-title">Menu Lengkap Masakan Padang</h2>
+<p class="page-subtitle">
+    <p style="text-align:center; color:white; margin-top:-10px;">
+    Beragam pilihan masakan Padang khas Minang, dimasak setiap hari dengan cita rasa autentik.
+</p>
+
+<!-- GRID MENU -->
+<section class="menu-grid">
+
+    <!-- ITEM -->
+    <div class="menu-card">
+        <img src="rendang.jpg" alt="Rendang Daging">
+        <h3>Rendang Daging</h3>
+        <p>Rp 15.000</p>
+    </div>
+
+    <div class="menu-card">
+        <img src="ayam.jpg" alt="Ayam Bakar">
+        <h3>Ayam Bakar</h3>
+        <p>Rp 12.000</p>
+    </div>
+
+    <div class="menu-card">
+        <img src="asam.jpg" alt="Asam Padeh">
+        <h3>Asam Padeh Tongkol</h3>
+        <p>Rp 12.000</p>
+    </div>
+
+    <div class="menu-card">
+        <img src="gulai.jpg" alt="Gulai Ayam">
+        <h3>Gulai Ayam</h3>
+        <p>Rp 13.000</p>
+    </div>
+
+    <div class="menu-card">
+        <img src="perkedel.jpg" alt="Perkedel">
+        <h3>Perkedel Kentang</h3>
+        <p>Rp 4.000</p>
+    </div>
+
+    <div class="menu-card">
+        <img src="telor.jpg" alt="Telur Bulat Gulai">
+        <h3>Telur Bulat Gulai</h3>
+        <p>Rp 10.000</p>
+    </div>
+
+    <div class="menu-card">
+        <img src="hati.jpg" alt="Ati Ampela">
+        <h3>Ati Ampela</h3>
+        <p>Rp 12.000</p>
+    </div>
+
+    <div class="menu-card">
+        <img src="goreng.jpg" alt="Ayam Goreng">
+        <h3>Ayam Goreng</h3>
+        <p>Rp 12.000</p>
+    </div>
+
+    <div class="menu-card">
+        <img src="opor.jpg" alt="Ayam Opor">
+        <h3>Ayam Opor</h3>
+        <p>Rp 12.000</p>
+    </div>
+
+    <div class="menu-card">
+        <img src="dadar.jpg" alt="Telur Dadar">
+        <h3>Telur Dadar</h3>
+        <p>Rp 12.000</p>
+    </div>
+
+    <div class="menu-card">
+        <img src="ar.jpg" alt="Ayam Rendang">
+        <h3>Ayam Rendang</h3>
+        <p>Rp 13.000</p>
+    </div>
+
+    <div class="menu-card">
+        <img src="baung.jpg" alt="Ikan Goreng Baung">
+        <h3>Ikan Goreng Baung</h3>
+        <p>Rp 12.000</p>
+    </div>
+
+    <div class="menu-card">
+        <img src="nila.jpg" alt="Ikan Bakar Nila">
+        <h3>Ikan Bakar Nila</h3>
+        <p>Rp 12.000</p>
+    </div>
+
+    <div class="menu-card">
+        <img src="lele.jpg" alt="Ikan Goreng Lele">
+        <h3>Ikan Goreng Lele</h3>
+        <p>Rp 12.000</p>
+    </div>
+
+    <div class="menu-card">
+        <img src="sarden.jpg" alt="Ikan Goreng Sarden">
+        <h3>Ikan Goreng Sarden</h3>
+        <p>Rp 12.000</p>
+    </div>
+</section>
+
+</body>
+</html>

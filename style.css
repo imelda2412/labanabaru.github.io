@@ -1,0 +1,584 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+/* ================= GLOBAL ================= */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(180deg, #b30000, #8b0000);
+    color: #333;
+}
+
+/* ================= NAVBAR ================= */
+.navbar {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    background: #ff6600;
+    padding: 16px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    position: relative;
+}
+
+.navbar a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 0;
+    height: 3px;
+    background: white;
+    transition: 0.3s;
+    border-radius: 5px;
+}
+
+.navbar a:hover::after {
+    width: 100%;
+}
+
+/* ================= PAGE TITLE (SEMUA HALAMAN) ================= */
+.page-title {
+    text-align: center;
+    color: white;
+    margin: 70px 0 10px;
+    font-size: 36px;
+    font-weight: 700;
+}
+
+.page-subtitle {
+    text-align: center;
+    color: #ffe0cc;
+    font-size: 15px;
+    margin-bottom: 45px;
+}
+
+/* ================= HERO (BERANDA) ================= */
+.hero-new {
+    background: linear-gradient(135deg, #fff3e0, #ffe0cc);
+    margin: 40px;
+    padding: 70px;
+    border-radius: 40px;
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 50px;
+    align-items: center;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+}
+
+.hero-text h1 {
+    font-size: 46px;
+    color: #b30000;
+    margin: 0;
+}
+
+.hero-text h2 {
+    font-size: 20px;
+    margin: 15px 0;
+    color: #ff6600;
+}
+
+.hero-text p {
+    font-size: 16px;
+    line-height: 1.8;
+    max-width: 480px;
+}
+
+/* ================= BUTTON ================= */
+.btn-group {
+    margin-top: 30px;
+}
+
+.btn {
+    padding: 14px 26px;
+    border-radius: 30px;
+    background: linear-gradient(135deg, #cc0000, #ff3300);
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    margin-right: 10px;
+    display: inline-block;
+    box-shadow: 0 10px 25px rgba(204,0,0,0.4);
+    transition: 0.25s ease;
+}
+
+.btn.secondary {
+    background: linear-gradient(135deg, #ff6600, #ff8800);
+}
+
+.btn:hover {
+    transform: translateY(-4px) scale(1.05);
+}
+
+.btn:active {
+    transform: scale(0.95);
+}
+
+/* ================= SLIDESHOW ================= */
+.slideshow {
+    position: relative;
+}
+
+.slide {
+    display: none;
+}
+
+.slide.active {
+    display: block;
+}
+
+.slide img,
+.slide video {
+    width: 100%;
+    border-radius: 30px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+}
+
+.arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #cc0000;
+    color: white;
+    border: none;
+    font-size: 22px;
+    padding: 8px 14px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.arrow-left { left: -20px; }
+.arrow-right { right: -20px; }
+
+/* ================= BEST MENU MINI (BERANDA) ================= */
+.highlight-menu {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 25px;
+    margin: 0 40px 60px;
+}
+
+.menu-mini {
+    background: #fff3e0;
+    border-radius: 25px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    transition: 0.3s;
+}
+
+.menu-mini:hover {
+    transform: translateY(-8px) scale(1.05);
+}
+
+.menu-mini img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 20px;
+}
+
+/* ================= MENU GRID (MENU BIASA) ================= */
+.menu-grid {
+    background: white;
+    margin: 40px;
+    padding: 60px;
+    border-radius: 35px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 30px;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+}
+
+.menu-card {
+    background: #fff3e0;
+    padding: 22px;
+    border-radius: 25px;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.menu-card:hover {
+    transform: translateY(-8px);
+}
+
+.menu-card img {
+    width: 100%;
+    height: 170px;
+    object-fit: cover;
+    border-radius: 18px;
+}
+
+/* ================= CONTENT CARD (TENTANG & KONTAK) ================= */
+.content {
+    max-width: 900px;
+    margin: 40px auto 80px;
+    background: #fff3e0;
+    padding: 50px;
+    border-radius: 35px;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+    text-align: center;
+}
+
+.content h2 {
+    color: #b30000;
+    margin-bottom: 20px;
+    font-size: 32px;
+}
+
+.content p {
+    line-height: 1.9;
+    font-size: 16px;
+}
+
+.content a {
+    display: inline-block;
+    margin-top: 20px;
+    text-decoration: none;
+    color: #b30000;
+    font-weight: 600;
+}
+
+.content a:hover {
+    text-decoration: underline;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 900px) {
+    .hero-new {
+        grid-template-columns: 1fr;
+        padding: 45px 30px;
+    }
+
+    .menu-grid,
+    .highlight-menu {
+        margin: 20px;
+    }
+
+    .content {
+        margin: 20px;
+        padding: 35px;
+    }
+}
+/* ================= ABOUT ================= */
+.about-hero {
+    text-align: center;
+    color: white;
+    margin: 70px 20px 40px;
+}
+
+.about-hero h1 {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+.about-hero p {
+    color: #ffe0cc;
+}
+
+.about-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    background: white;
+    margin: 40px;
+    padding: 50px;
+    border-radius: 35px;
+    align-items: center;
+}
+
+.about-section.reverse {
+    grid-template-columns: 1fr 1fr;
+}
+
+.about-img img {
+    width: 100%;
+    border-radius: 25px;
+    object-fit: cover;
+}
+
+.about-text h2 {
+    color: #b30000;
+    margin-top: 0;
+}
+
+.about-text p {
+    line-height: 1.8;
+}
+
+/* ================= CONTACT ================= */
+.contact-wrapper {
+    text-align: center;
+    margin: 80px 20px;
+    color: white;
+}
+
+.contact-card {
+    background: white;
+    max-width: 500px;
+    margin: 40px auto;
+    padding: 40px;
+    border-radius: 30px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+    color: #333;
+}
+
+.contact-card a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.contact-item,
+.contact-card a {
+    display: block;
+    margin-bottom: 25px;
+    font-size: 16px;
+}
+
+.contact-card span {
+    display: block;
+    margin-top: 6px;
+    font-size: 14px;
+    color: #555;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+    .about-section {
+        grid-template-columns: 1fr;
+        margin: 20px;
+        padding: 35px;
+    }
+}
+/* ================= INFO / KEUNGGULAN ================= */ 
+.info-section { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(260px,
+1fr)); 
+    gap: 30px; 
+    margin: 0 40px 60px; 
+} 
+.info-card { 
+    background: white; 
+    padding: 35px; 
+    border-radius: 25px; 
+    box-shadow: 0 10px 25px rgba(0,0,0,0.12); 
+    transition: 0.3s; 
+} 
+.info-card:hover { 
+    transform: translateY(-6px); 
+} 
+.info-card h3 { 
+    margin-top: 0; 
+    color: #cc0000; } 
+    
+/* ================= RESPONSIVE ================= */ 
+@media (max-width: 900px) {
+    .hero-new { 
+        grid-template-columns: 1fr; 
+        padding: 45px 30px; 
+    } 
+    
+    .hero-text { 
+        text-align: center; 
+    } 
+    
+    .hero-text p { 
+        margin: auto; 
+    } 
+    
+    .arrow-left {
+        left: 10px; 
+    } 
+    
+    .arrow-right {
+        right: 10px; 
+    } 
+    
+    .info-section { 
+        margin: 20px; 
+    } 
+}
+/* ================= FORM REVIEW ================= */
+.form-section {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 20px;
+}
+
+.form-card {
+    background: white;
+    width: 100%;
+    max-width: 520px;
+    padding: 45px;
+    border-radius: 35px;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+}
+
+.form-card h2 {
+    text-align: center;
+    color: #b30000;
+    margin-bottom: 10px;
+}
+
+.form-card p {
+    text-align: center;
+    color: #555;
+    font-size: 14px;
+}
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 14px 16px;
+    border-radius: 14px;
+    border: 1.5px solid #ddd;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    transition: 0.25s;
+}
+
+.form-group textarea {
+    resize: none;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #ff6600;
+    box-shadow: 0 0 0 3px rgba(255,102,0,0.15);
+}
+
+.btn-submit {
+    width: 100%;
+    padding: 14px;
+    border-radius: 30px;
+    border: none;
+    background: linear-gradient(135deg, #cc0000, #ff3300);
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.btn-submit:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(204,0,0,0.4);
+}
+
+.btn-submit:active {
+    transform: scale(0.97);
+}
+/* ================= REVIEW ================= */
+.review-section {
+    margin: 60px 40px 80px;
+    background: white;
+    padding: 50px;
+    border-radius: 35px;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+}
+
+.review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 35px;
+}
+
+.review-header h2 {
+    color: #b30000;
+    margin: 0;
+}
+
+.filter-select {
+    padding: 10px 16px;
+    border-radius: 20px;
+    border: 1.5px solid #ddd;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+}
+
+.review-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+}
+
+.review-card {
+    background: #fff3e0;
+    padding: 25px;
+    border-radius: 25px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+    transition: 0.3s;
+}
+
+.review-card:hover {
+    transform: translateY(-6px);
+}
+
+.review-card h3 {
+    margin: 10px 0 5px;
+    color: #b30000;
+}
+
+.review-card p {
+    font-size: 14px;
+    line-height: 1.7;
+    color: #333;
+}
+
+.review-card small {
+    display: block;
+    margin-top: 12px;
+    color: #777;
+    font-size: 12px;
+}
+
+/* BADGE */
+.badge {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    color: white;
+}
+
+.badge.review {
+    background: linear-gradient(135deg, #28a745, #5fd38c);
+}
+
+.badge.keluhan {
+    background: linear-gradient(135deg, #dc3545, #ff6b6b);
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+    .review-section {
+        margin: 20px;
+        padding: 35px;
+    }
+
+    .review-header {
+        flex-direction: column;
+        gap: 15px;
+    }
+}
