@@ -7,16 +7,16 @@
 </head>
 <body>
 
+<!-- NAVBAR -->
 <nav class="navbar">
-    <a href="beranda.php">Beranda</a>
-    <a href="menu.php">Menu</a>
-    <a href="tentang.php">Tentang</a>
-    <a href="kontak.php">Kontak</a>
+    <a href="index.html">Beranda</a>
+    <a href="menu.html">Menu</a>
+    <a href="tentang.html">Tentang</a>
+    <a href="kontak.html">Kontak</a>
 </nav>
 
 <!-- HERO -->
 <section class="hero-new">
-    <!-- TEXT -->
     <div class="hero-text">
         <h1>Masakan Padang<br>Labana Baru</h1>
         <h2>Cita Rasa Padang Asli Sejak 2013</h2>
@@ -28,16 +28,17 @@
         </p>
 
         <div class="btn-group">
-            <a href="form.php" class="btn">Kirim Keluhan</a>
-            <a href="review.php" class="btn secondary">Lihat Review</a>
+            <a href="form.html" class="btn">Kirim Keluhan</a>
+            <a href="review.html" class="btn secondary">Lihat Review</a>
         </div>
     </div>
 
-    <!-- SLIDESHOW (FUNGSI TETAP) -->
+    <!-- SLIDESHOW -->
     <div class="slideshow">
         <div class="slide active">
             <img src="padang.jpg" alt="Masakan Padang">
         </div>
+
         <div class="slide">
             <video controls>
                 <source src="video.mp4" type="video/mp4">
@@ -49,53 +50,59 @@
     </div>
 </section>
 
-<!-- MINI MENU CARD -->
+<!-- MINI MENU -->
 <section class="highlight-menu">
     <div class="menu-mini">
-        <img src="rendang.jpg">
+        <img src="rendang.jpg" alt="Rendang">
         <h4>Rendang</h4>
         <span>Best Seller</span>
     </div>
 
     <div class="menu-mini">
-        <img src="ayam.jpg">
+        <img src="ayam.jpg" alt="Ayam Bakar">
         <h4>Ayam Bakar</h4>
         <span>Favorit</span>
     </div>
 
     <div class="menu-mini">
-        <img src="asam.jpg">
+        <img src="asam.jpg" alt="Asam Padeh">
         <h4>Asam Padeh</h4>
         <span>Rekomendasi</span>
     </div>
 </section>
 
-<!-- HIGHLIGHT / KEUNGGULAN --> 
-<section class="info-section"> 
-    <div class="info-card"> 
-        <h3>🍽️ Masakan Autentik</h3> 
-        <p> Dimasak langsung oleh juru masak berpengalaman 
-            dengan bumbu khas Minang asli. 
-        </p> 
-    </div> 
-    <div class="info-card"> 
-        <h3>⭐ Pelayanan Terbaik</h3> 
+<!-- INFO -->
+<section class="info-section">
+    <div class="info-card">
+        <h3>🍽️ Masakan Autentik</h3>
         <p>
-            Kami selalu mengutamakan kenyamanan dan 
-            kepuasan pelanggan setiap hari. 
-        </p> 
-    </div> 
+            Dimasak langsung oleh juru masak berpengalaman
+            dengan bumbu khas Minang asli.
+        </p>
+    </div>
+
+    <div class="info-card">
+        <h3>⭐ Pelayanan Terbaik</h3>
+        <p>
+            Kami selalu mengutamakan kenyamanan dan
+            kepuasan pelanggan setiap hari.
+        </p>
+    </div>
 </section>
 
+<!-- SCRIPT -->
 <script>
 let index = 0;
 const slides = document.querySelectorAll('.slide');
 
-function showSlide(i){
+function showSlide(i) {
     slides.forEach(s => {
         s.classList.remove('active');
         const video = s.querySelector('video');
-        if(video){ video.pause(); video.currentTime = 0; }
+        if (video) {
+            video.pause();
+            video.currentTime = 0;
+        }
     });
     slides[i].classList.add('active');
 }
