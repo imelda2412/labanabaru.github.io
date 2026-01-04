@@ -1,51 +1,86 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review Pelanggan | Labana Baru</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <a href="index.html">Beranda</a>
+    <a href="menu.html">Menu</a>
+    <a href="tentang.html">Tentang</a>
+    <a href="kontak.html">Kontak</a>
+</nav>
+
+<!-- REVIEW SECTION -->
+<section class="review-section">
+    <div class="review-header">
+        <div class="review-title">
+            <h2>Review & Keluhan Pelanggan</h2>
+            <p>Apa kata pelanggan tentang Labana Baru</p>
+        </div>
+
+        <select id="filterType" class="filter-select">
+            <option value="all">Semua</option>
+            <option value="review">Review</option>
+            <option value="keluhan">Keluhan</option>
+        </select>
+    </div>
+
+    <!-- LIST REVIEW -->
+    <div id="reviewList" class="review-grid"></div>
+</section>
+
+<!-- SCRIPT -->
 <script>
 const reviewList = document.getElementById('reviewList');
 const filterType = document.getElementById('filterType');
 
-const API_URL = "PASTE_URL_APPS_SCRIPT_DI_SINI";
-
-<script>
-fetch("https://script.google.com/macros/s/AKfycbySjG_vNHYgE1AOslpmQf-awFutxeMJn2eq_MJhs92B2wAR_8EcdPINhkBscfGgBfHf/exec")
-  .then(res => res.json())
-  .then(data => {
-    console.log(data); // WAJIB ADA INI BUAT CEK
-  });
-</script>
-
 function loadReviews() {
-  fetch(API_URL)
-    .then(res => res.json())
-    .then(data => {
-      reviewList.innerHTML = '';
+    const reviews = JSON.parse(localStorage.getItem('reviews')) || [];
+    reviewList.innerHTML = '';
 
-      data.forEach(item => {
-        const type = item.review.toLowerCase();
+    if (reviews.length === 0) {
+        reviewList.innerHTML = `
+            <p class="empty-review">
+                Belum ada review atau keluhan.
+            </p>
+        `;
+        return;
+    }
 
-        if (filterType.value === 'all' || type === filterType.value) {
-          const card = document.createElement('div');
-          card.className = 'review-card';
+    reviews.forEach(review => {
+        const typeLower = review.type.toLowerCase();
 
-          const badgeClass = type === 'review' ? 'review' : 'keluhan';
+        if (filterType.value === 'all' || typeLower === filterType.value) {
+            const card = document.createElement('div');
+            card.className = 'review-card';
 
-          card.innerHTML = `
-            <span class="badge ${badgeClass}">
-              ${item.review}
-            </span>
-            <h3>${item.yuni}</h3>
-            <p>${item.pelayanannya}</p>
-            <small>${item["2025-12-18 4:37"] || ''}</small>
-          `;
+            const badgeClass = typeLower === 'review' ? 'review' : 'keluhan';
+            const badgeText  = typeLower === 'review' ? 'Review' : 'Keluhan';
 
-          reviewList.appendChild(card);
+            card.innerHTML = `
+                <span class="badge ${badgeClass}">
+                    ${badgeText}
+                </span>
+                <h3>${review.name}</h3>
+                <p>${review.message}</p>
+                <small>${review.date}</small>
+            `;
+
+            reviewList.appendChild(card);
         }
-      });
-    })
-    .catch(err => {
-      reviewList.innerHTML = "<p>Gagal memuat data</p>";
-      console.error(err);
     });
 }
 
 filterType.addEventListener('change', loadReviews);
 loadReviews();
 </script>
+
+</body>
+</html>
