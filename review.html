@@ -1,56 +1,42 @@
 <script>
-const reviewList = document.getElementById("reviewList");
-const filterType = document.getElementById("filterType");
+document.addEventListener("DOMContentLoaded", () => {
 
-const API_URL = "https://script.google.com/macros/s/AKfycbySjG_vNHYgE1AOslpmQf-awFutxeMJn2eq_MJhs92B2wAR_8EcdPINhkBscfGgBfHf/exec";
+  const reviewList = document.getElementById("reviewList");
 
-async function loadReviews() {
-  reviewList.innerHTML = "Loading...";
+  if (!reviewList) {
+    alert("reviewList tidak ditemukan!");
+    return;
+  }
 
-  try {
-    const res = await fetch(API_URL);
-    const data = await res.json();
+  const API_URL = "https://script.google.com/macros/s/AKfycbySjG_vNHYgE1AOslpmQf-awFutxeMJn2eq_MJhs92B2wAR_8EcdPINhkBscfGgBfHf/exec";
 
-    console.log("DATA:", data);
+  fetch(API_URL)
+    .then(res => res.json())
+    .then(data => {
+      console.log("DATA DARI API:", data);
 
-    reviewList.innerHTML = "";
-
-    if (!data || data.length === 0) {
-      reviewList.innerHTML = "<p>Belum ada review.</p>";
-      return;
-    }
-
-    data.reverse().forEach(item => {
-      const tipe = (item.tipe || "review").toLowerCase();
-
-      // kalau filter tidak ada → tampilkan semua
-      if (!filterType || filterType.value === "all" || tipe === filterType.value) {
-        const card = document.createElement("div");
-        card.className = "review-card";
-
-        const badgeClass = tipe === "keluhan" ? "keluhan" : "review";
-
-        card.innerHTML = `
-          <span class="badge ${badgeClass}">${tipe.toUpperCase()}</span>
-          <h3>${item.nama || "-"}</h3>
-          <p>${item.pesan || "-"}</p>
-          <small>${item.tanggal || ""}</small>
-        `;
-
-        reviewList.appendChild(card);
+      if (data.length === 0) {
+        reviewList.innerHTML = "<p>Belum ada review.</p>";
+        return;
       }
+
+      reviewList.innerHTML = "";
+
+      data.forEach(item => {
+        const div = document.createElement("div");
+        div.innerHTML = `
+          <h3>${item.nama}</h3>
+          <p>${item.pesan}</p>
+          <small>${item.tanggal}</small>
+          <hr>
+        `;
+        reviewList.appendChild(div);
+      });
+    })
+    .catch(err => {
+      console.error("FETCH ERROR:", err);
+      reviewList.innerHTML = "Gagal load data";
     });
 
-  } catch (err) {
-    console.error("FETCH ERROR:", err);
-    reviewList.innerHTML = "<p>Gagal memuat data.</p>";
-  }
-}
-
-// hanya pasang event kalau select-nya ada
-if (filterType) {
-  filterType.addEventListener("change", loadReviews);
-}
-
-loadReviews();
+});
 </script>
