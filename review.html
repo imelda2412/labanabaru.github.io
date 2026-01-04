@@ -1,42 +1,51 @@
 <script>
-document.addEventListener("DOMContentLoaded", () => {
+const reviewList = document.getElementById('reviewList');
+const filterType = document.getElementById('filterType');
 
-  const reviewList = document.getElementById("reviewList");
+const API_URL = "PASTE_URL_APPS_SCRIPT_DI_SINI";
 
-  if (!reviewList) {
-    alert("reviewList tidak ditemukan!");
-    return;
-  }
+<script>
+fetch("https://script.google.com/macros/s/AKfycbySjG_vNHYgE1AOslpmQf-awFutxeMJn2eq_MJhs92B2wAR_8EcdPINhkBscfGgBfHf/exec")
+  .then(res => res.json())
+  .then(data => {
+    console.log(data); // WAJIB ADA INI BUAT CEK
+  });
+</script>
 
-  const API_URL = "https://script.google.com/macros/s/AKfycbySjG_vNHYgE1AOslpmQf-awFutxeMJn2eq_MJhs92B2wAR_8EcdPINhkBscfGgBfHf/exec";
-
+function loadReviews() {
   fetch(API_URL)
     .then(res => res.json())
     .then(data => {
-      console.log("DATA DARI API:", data);
-
-      if (data.length === 0) {
-        reviewList.innerHTML = "<p>Belum ada review.</p>";
-        return;
-      }
-
-      reviewList.innerHTML = "";
+      reviewList.innerHTML = '';
 
       data.forEach(item => {
-        const div = document.createElement("div");
-        div.innerHTML = `
-          <h3>${item.nama}</h3>
-          <p>${item.pesan}</p>
-          <small>${item.tanggal}</small>
-          <hr>
-        `;
-        reviewList.appendChild(div);
+        const type = item.review.toLowerCase();
+
+        if (filterType.value === 'all' || type === filterType.value) {
+          const card = document.createElement('div');
+          card.className = 'review-card';
+
+          const badgeClass = type === 'review' ? 'review' : 'keluhan';
+
+          card.innerHTML = `
+            <span class="badge ${badgeClass}">
+              ${item.review}
+            </span>
+            <h3>${item.yuni}</h3>
+            <p>${item.pelayanannya}</p>
+            <small>${item["2025-12-18 4:37"] || ''}</small>
+          `;
+
+          reviewList.appendChild(card);
+        }
       });
     })
     .catch(err => {
-      console.error("FETCH ERROR:", err);
-      reviewList.innerHTML = "Gagal load data";
+      reviewList.innerHTML = "<p>Gagal memuat data</p>";
+      console.error(err);
     });
+}
 
-});
+filterType.addEventListener('change', loadReviews);
+loadReviews();
 </script>
